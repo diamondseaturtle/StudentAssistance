@@ -1,6 +1,9 @@
-import javax.swing.*;  
-public class Main {  
-    //javafx test
+import javax.swing.*; 
+
+
+ 
+public class Test {  
+
     public static void main(String[] args) {  
     // frame and button creation
     JFrame f = new JFrame();       
