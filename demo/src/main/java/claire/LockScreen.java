@@ -154,17 +154,14 @@ public class LockScreen{
             }
         });
 
-        Color colorBox = new Color(48,47,78);
-        Color colorText = new Color(225,225,225);
-
         textFields = new JTextField[2];
         for (int i = 0; i < 2; i++) {
             textFields[i] = new JTextField();
             textFields[i].setColumns(1);
             textFields[i].setFont(Window.font);
-            textFields[i].setBackground(colorBox);
-            textFields[i].setBorder(BorderFactory.createLineBorder(colorBox));
-            textFields[i].setForeground(colorText);
+            textFields[i].setBackground(Window.colorBox);
+            textFields[i].setBorder(BorderFactory.createLineBorder(Window.colorBox));
+            textFields[i].setForeground(Window.colorText);
         }
         
         textFields[0].setBounds(853, 303, 353, 55);

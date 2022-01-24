@@ -6,12 +6,14 @@ import javax.swing.JLayeredPane;
 import java.awt.Font;
 import java.io.File;
 import java.io.InputStream;
-
+import java.awt.Color;
 
 public class Window{
     public static JFrame frame;
     public static Font font;
-
+    public static Color colorBox;
+    public static Color colorText;
+    
     public Window(){
         frame = new JFrame();
         
@@ -20,6 +22,9 @@ public class Window{
         frame.setUndecorated(true); // removes the bar on the top of the window
         frame.setLocationRelativeTo(null); // center the window
         frame.getContentPane().setBackground(new Color(37,36,62));
+        
+        colorBox = new Color(48,47,78);
+        colorText = new Color(225,225,225);
         
         try {
             font = font.createFont(Font.TRUETYPE_FONT, new File("res/Montserrat.ttf"));
