@@ -89,6 +89,11 @@ public class App
             }
         }
     }
+
+    public static void login(String usr, String pss, MongoCollection<Document> collection, MongoDatabase database)
+    {
+        
+    }
     public static void main( String[] args )
     {
         //Client connections and setup
