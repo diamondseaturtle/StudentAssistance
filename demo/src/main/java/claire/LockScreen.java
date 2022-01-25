@@ -1,15 +1,12 @@
 package claire;
 import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.BorderFactory;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import java.awt.Color;
 
 import java.util.Arrays;
 import java.util.ArrayList;
