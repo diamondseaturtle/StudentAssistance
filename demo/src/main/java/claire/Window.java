@@ -1,12 +1,8 @@
 package claire;
 import java.awt.Color;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLayeredPane;
 import java.awt.Font;
 import java.io.File;
-import java.io.InputStream;
-import java.awt.Color;
 
 public class Window{
     public static JFrame frame;
