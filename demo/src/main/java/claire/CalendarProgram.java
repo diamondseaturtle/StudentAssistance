@@ -7,6 +7,11 @@ import java.awt.event.*;
 import java.util.*;
 
 
+/**
+ * 
+ * Entry point for Calendar
+ *
+ */
 public class CalendarProgram{
     static JLabel currMonth, lblYear;
     static JButton btnPrev, btnNext;
