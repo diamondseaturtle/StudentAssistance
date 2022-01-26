@@ -2,6 +2,11 @@ package claire;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * Todo List
+ *
+ */
 public class ToDoList {
 
 	private static ArrayList<String> toDo;
