@@ -1,14 +1,14 @@
+package claire;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import java.awt.Image;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 
 public class Window {
-    
+
     private static CardLayout card;
     private static JFrame frame;
     private static JPanel cardPane;
@@ -20,10 +20,9 @@ public class Window {
     private static LockScreen lock;
     private static CalculatorScreen calculator;
     private static HomeScreen home;
-    private static CalendarScreen calendar;
-    
-    public Window(String start) {
-        
+
+    public Window() {
+
         // Frame settings
         frame = new JFrame();
         frame.setSize(1280, 720);
@@ -50,23 +49,21 @@ public class Window {
         cardPane.setBackground(new Color(37, 36, 62));
 
         // Create all screens here
-        home = new HomeScreen();
         lock = new LockScreen();
-        calendar = new CalendarScreen();
         calculator = new CalculatorScreen();
-        
+        home = new HomeScreen();
+
         // Add all screens to cardpane
-        cardPane.add(home.getPanel(), "home");
         cardPane.add(lock.getPanel(), "lock");
-        cardPane.add(calendar.getPanel(), "calendar");
         cardPane.add(calculator.getPanel(), "calculator");
-        
-        switchScreen(start);
+        cardPane.add(home.getPanel(), "home");
+
+        switchScreen("lock");
         frame.add(cardPane);
         frame.setVisible(true);
 
     }
-    
+
     public static void switchScreen(String screen) {
         card.show(cardPane, screen);
     }
