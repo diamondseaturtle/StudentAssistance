@@ -1,43 +1,38 @@
-package claire;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.util.GregorianCalendar;
 
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
 
-/**
- * 
- * Entry point for Calendar
- *
- */
-public class CalendarProgram{
-    static JLabel currMonth, lblYear;
-    static JButton btnPrev, btnNext;
-    static JTable tblCalendar;
-    static JComboBox cmbYear;
-    static JFrame frmMain;
-    static Container pane;
-    static DefaultTableModel mtblCalendar; //Table model
-    static JScrollPane stblCalendar; //The scrollpane
-    static JPanel pnlCalendar;
-    static int realYear, realMonth, realDay, currentYear, currentMonth;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.Component;
+import java.awt.Container;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class CalendarScreen extends Screen{
     
-    public static void main (String args[]){
-        //Look and feel
-        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
-        catch (ClassNotFoundException e) {}
-        catch (InstantiationException e) {}
-        catch (IllegalAccessException e) {}
-        catch (UnsupportedLookAndFeelException e) {}
+    private static JLabel currMonth, lblYear;
+    private static JButton btnPrev, btnNext;
+    private static JTable tblCalendar;
+    private static JComboBox cmbYear;
+    private static JFrame frmMain;
+    private static DefaultTableModel mtblCalendar; // Table model
+    private static JScrollPane stblCalendar; // The scrollpanel
+    private static int realYear, realMonth, realDay, currentYear, currentMonth;
+    
+    public CalendarScreen(){
         
-        //Prepare frame
-        frmMain = new JFrame ("Calendar"); //Create frame
-        frmMain.setSize(330, 375); //Set size to 400x400 pixels //previous dimensions (330,375)
-        pane = frmMain.getContentPane(); //Get content pane
-        pane.setLayout(null); //Apply null layout
-        frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
+        backButton();
         
         //Create controls
         currMonth = new JLabel ("January");
@@ -45,30 +40,34 @@ public class CalendarProgram{
         cmbYear = new JComboBox();
         btnPrev = new JButton ("Previous");
         btnNext = new JButton ("Next");
-        mtblCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
+        mtblCalendar = new DefaultTableModel()
+        
+        {
+            public boolean isCellEditable(int rowIndex, int mColIndex){
+                return false;
+            }
+        };
+        
         tblCalendar = new JTable(mtblCalendar);
         stblCalendar = new JScrollPane(tblCalendar);
-        pnlCalendar = new JPanel(null);
         
         //Set border
-        pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
+        // panel.setBorder(BorderFactory.createTitledBorder("Calendar"));
         
         //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
         btnNext.addActionListener(new btnNext_Action());
         cmbYear.addActionListener(new cmbYear_Action());
         
-        //Add controls to pane
-        pane.add(pnlCalendar);
-        pnlCalendar.add(currMonth);
-        pnlCalendar.add(lblYear);
-        pnlCalendar.add(cmbYear);
-        pnlCalendar.add(btnPrev);
-        pnlCalendar.add(btnNext);
-        pnlCalendar.add(stblCalendar);
+        //Add controls to panel
+        panel.add(currMonth);
+        panel.add(lblYear);
+        panel.add(cmbYear);
+        panel.add(btnPrev);
+        panel.add(btnNext);
+        panel.add(stblCalendar);
         
         //Set bounds
-        pnlCalendar.setBounds(0, 0, 320, 335); //previous dimensions (0, 0, 320, 335)
         currMonth.setBounds(160-currMonth.getPreferredSize().width/2, 25, 100, 25); //previous dimensions (160-lblMonth.getPreferredSize().width/2, 25, 100, 25)
         lblYear.setBounds(10, 305, 80, 20); //previous dimensions (10, 305, 80, 20)
         cmbYear.setBounds(230, 305, 80, 20); //previous dimensions (230, 305, 80, 20)
@@ -76,9 +75,6 @@ public class CalendarProgram{
         btnNext.setBounds(260, 25, 50, 25); //previous dimensions (260, 25, 50, 25)
         stblCalendar.setBounds(10, 50, 300, 250); //previous dimensions (10, 50, 300, 250)
         
-        //Make frame visible
-        frmMain.setResizable(false);
-        frmMain.setVisible(true);
         
         //Get real month/year
         GregorianCalendar cal = new GregorianCalendar(); //Create calendar
@@ -127,8 +123,13 @@ public class CalendarProgram{
         //Allow/disallow buttons
         btnPrev.setEnabled(true);
         btnNext.setEnabled(true);
-        if (month == 0 && year <= realYear-10){btnPrev.setEnabled(false);} //Too early
-        if (month == 11 && year >= realYear+100){btnNext.setEnabled(false);} //Too late
+        if (month == 0 && year <= realYear-10){
+            btnPrev.setEnabled(false);
+        } //Too early
+        if (month == 11 && year >= realYear+100){
+            btnNext.setEnabled(false);
+        } //Too late
+        
         currMonth.setText(months[month]); //Refresh the month label (at the top)
         currMonth.setBounds(160-currMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
@@ -160,18 +161,18 @@ public class CalendarProgram{
         public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
             if (column == 0 || column == 6){ //Week-end
-                setBackground(new Color(255, 220, 220));
+                setBackground(Window.colorBox);
             }
             else{ //Week
-                setBackground(new Color(255, 255, 255));
+                setBackground(Window.colorBox);
             }
             if (value != null){
                 if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear){ //Today
-                    setBackground(new Color(220, 220, 255));
+                    setBackground(Window.colorBox);
                 }
             }
             setBorder(null);
-            setForeground(Color.black);
+            setForeground(Window.colorText);
             return this;
         }
     }
