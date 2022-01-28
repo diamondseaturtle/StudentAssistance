@@ -1,4 +1,4 @@
-package claire;
+ 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -11,6 +11,9 @@ import java.io.*;
 import java.util.*;
 import java.util.HashMap;
 
+/*
+*   Calculator user interface by Kayla
+*/
 public class CalculatorScreen extends Screen {
 
     private JTextField textFields = null;
@@ -273,11 +276,11 @@ public class CalculatorScreen extends Screen {
                 // Get dimensions of all buttons laid out
 
                 buttons[i][j].setBounds(
-                    (1280 / 2 - calculatorWidth / 2) + // Center the X origin point
+                    (Window.screenWidth / 2 - calculatorWidth / 2) + // Center the X origin point
                     (i * buttonSize) + // Offset by buttons
                     (i * buttonSpacing), // Offset by spacing
 
-                    (720 / 2 - calculatorHeight / 2) + // Center the Y origin point
+                    (Window.screenHeight / 2 - calculatorHeight / 2) + // Center the Y origin point
                     ((j + 1) * buttonSize) + // Offset by buttons. The +1 is to account for the textfield on top
                     ((j + 1) * buttonSpacing), // Offset by spacing. The +1 is to account for the textfield on top
 
@@ -320,8 +323,8 @@ public class CalculatorScreen extends Screen {
         textFields.setBorder(BorderFactory.createLineBorder(Window.colorBox));
 
         textFields.setBounds((
-            1280 / 2 - calculatorWidth / 2), // Center the X origin point
-            (720 / 2 - calculatorHeight / 2) - buttonSize - buttonSpacing, // Center the Y origin point. The button size and spacing is to place the field a buttons-length above the button grid
+            Window.screenWidth / 2 - calculatorWidth / 2), // Center the X origin point
+            (Window.screenHeight / 2 - calculatorHeight / 2) - buttonSize - buttonSpacing, // Center the Y origin point. The button size and spacing is to place the field a buttons-length above the button grid
             calculatorWidth, // Width of the textfield, same width as the button grid
             buttonSize); // Height of the text field, same as a button
 

@@ -6,7 +6,9 @@ import java.util.*;
 import java.util.HashMap;
 
 
-
+/*
+*   Calculator functionality by Claire
+*/
 public class Calc {
 
     enum Stage

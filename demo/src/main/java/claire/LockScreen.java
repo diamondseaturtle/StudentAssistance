@@ -1,4 +1,4 @@
-package claire;
+ 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -28,6 +28,9 @@ import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
 import com.mongodb.client.model.ReplaceOptions;
 
+/*
+*   Lock Screen User Interface by Kayla
+*/
 public class LockScreen extends Screen {
 
     private JLabel ui = null;

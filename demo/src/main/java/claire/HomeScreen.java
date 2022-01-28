@@ -1,4 +1,3 @@
-package claire;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+*   Home Screen User Interface by Kayla
+*/
 public class HomeScreen extends Screen {
 
     private JLabel[] buttons = null;
@@ -20,21 +22,24 @@ public class HomeScreen extends Screen {
     private LocalDate localDate = null;
 
     public HomeScreen() {
-
+        
+        closeButton();
+        
         time = new JLabel(getTime(), JLabel.LEFT);
-        time.setBounds(510, 160, 500, 250);
+        time.setBounds(500, 160, 500, 250);
         time.setFont(Window.getFont(72));
         time.setForeground(Window.colorText);
         panel.add(time);
 
         date = new JLabel(getDate(), JLabel.CENTER);
-        date.setBounds(0, 0, 1280, 680);
+        date.setBounds(0, 0, Window.screenWidth, 680);
         date.setFont(Window.getFont(20));
         date.setForeground(Window.colorText);
         panel.add(date);
 
         // Repaint time every second
-        Timer timer = new Timer(500, new ActionListener() {
+        Timer timer = new Timer(500, new ActionListener() 
+        {
             @Override
             public void actionPerformed(ActionEvent e) {
                 time.setText(getTime());
@@ -45,7 +50,7 @@ public class HomeScreen extends Screen {
 
         // Set up app buttons
         final String[] buttonVals = {
-            "notebook",
+            //"notebook",
             "calculator",
             "calendar",
             "exit"
@@ -66,13 +71,13 @@ public class HomeScreen extends Screen {
             // Get dimensions of all buttons laid out
 
             buttons[i].setBounds(
-                (1280 / 2 - width / 2) + // Center the X origin point
-                (i * buttonSize) + // Offset by buttons
+                (Window.screenWidth / 2 - width / 2) + // Center the X origin point
+                (i * buttonSize) + // Offset by buttons 
                 (i * buttonSpacing), // Offset by spacing
                 yOffset, // Position on screen manually decided
                 buttonSize, buttonSize); // button dimensions
 
-            buttons[i].addMouseListener(new MouseAdapter()
+            buttons[i].addMouseListener(new MouseAdapter() 
             {
                 @Override
                 public void mouseClicked(MouseEvent e) {

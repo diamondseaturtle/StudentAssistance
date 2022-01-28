@@ -23,7 +23,9 @@ import com.mongodb.client.model.ReplaceOptions;
 // import com.mongodb.client.model.Projections;
 // import com.mongodb.client.model.Sorts;
 
-
+/*
+*   MongoDB login and functionality by Claire
+*/
 public class App 
 {
     public static void createUser(String usr, String pss, MongoCollection<Document> collection, MongoDatabase database)
