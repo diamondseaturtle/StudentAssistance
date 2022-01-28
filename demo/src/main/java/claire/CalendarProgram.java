@@ -47,7 +47,7 @@ public class CalendarProgram{
         stblCalendar = new JScrollPane(tblCalendar);
         pnlCalendar = new JPanel(null);
         
-        //testing to create the controls for the big calendar
+        // testing to create the controls for the big calendar
         currMonthBig = new JLabel("January");
         pnlCalendarBig = new JPanel(null);
         btnPrevBig = new JButton("Previous");
