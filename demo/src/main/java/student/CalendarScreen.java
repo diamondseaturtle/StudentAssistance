@@ -104,7 +104,7 @@ public class CalendarScreen extends Screen{
         
         txtTodo = new JTextField();
         txtTodo.setColumns(10);
-        txtTodo.setText("");
+        txtTodo.setText("Reading");
         txtTodo.setFont(Window.getFont(20));
         txtTodo.setForeground(Window.colorText);
         txtTodo.setBackground(Window.colorBoxLight);
@@ -275,8 +275,6 @@ public class CalendarScreen extends Screen{
         ); 
         mtblCalendarBig.setColumnCount(7);
         mtblCalendarBig.setRowCount(6);
-
-        
 
         //Refresh calendar
         refreshCalendar (realMonth, realYear); //Refresh calendar
