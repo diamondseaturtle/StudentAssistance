@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -29,8 +30,9 @@ import com.mongodb.client.result.UpdateResult;
 import com.mongodb.client.model.ReplaceOptions;
 
 /*
-*   Lock Screen User Interface by Kayla
-*/
+ * Login functionality developed by Claire
+ * UI developed by Kayla
+ */
 public class LockScreen extends Screen {
 
     private JLabel ui = null;
@@ -38,7 +40,7 @@ public class LockScreen extends Screen {
     private JLabel buttonLogin = null;
     private JTextField[] textFields = null;
     private boolean creatingAccount;
-
+    
     private String uri = "mongodb://admin:students@cluster0-shard-00-00.nnhfz.mongodb.net:27017,cluster0-shard-00-01.nnhfz.mongodb.net:27017,cluster0-shard-00-02.nnhfz.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-o8vojx-shard-0&authSource=admin&retryWrites=true&w=majority";
     private MongoClient mongoClient = MongoClients.create(uri);
     private MongoDatabase database = mongoClient.getDatabase("loginData");
@@ -72,7 +74,7 @@ public class LockScreen extends Screen {
         }
         return false;
     }
-
+    
     public LockScreen() {
 
         // user interface image overlay

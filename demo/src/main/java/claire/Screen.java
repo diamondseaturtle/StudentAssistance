@@ -5,8 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /*
-*   Screen user interface by Kayla
-*/
+ * UI developed by Kayla
+ */
 public class Screen{
     
     protected JLayeredPane panel = new JLayeredPane();

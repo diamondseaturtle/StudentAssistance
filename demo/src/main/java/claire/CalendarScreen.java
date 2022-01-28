@@ -23,10 +23,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /*
-*   To do list functionality by Samskrithi
-*   To do list interface by Samskrithi
-*   Calendar User Interface by Samskrithi and Kayla
-*/
+ * To do list functionality developed by Samskrithi
+ * Calendar functionality developed by Samskrithi
+ * UI developed by Samskrithi and Kayla
+ */
 public class CalendarScreen extends Screen{ 
     private static JLabel currMonthBig, lblTodo;
     private static JButton btnPrevBig, btnNextBig, btnCurrent, btnSaveTodo;

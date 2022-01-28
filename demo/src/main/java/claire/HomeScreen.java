@@ -10,8 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
-*   Home Screen User Interface by Kayla
-*/
+ * UI developed by Kayla
+ */
 public class HomeScreen extends Screen {
 
     private JLabel[] buttons = null;

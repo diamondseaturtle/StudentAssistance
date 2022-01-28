@@ -1,9 +1,9 @@
 
 /*
-*   Claire - Calculator functionality, Login functionality
-*   Samskrithi - Calendar functionality, To do list functionality
-*   Kayla - User Interfaces
-*/
+ * MongoDB + Login and calendar functionality developed by Claire
+ * Calendar + To do list functionality developed by Samskrithi
+ * UI developed by Kayla and Samskrithi
+ */
 public class studentAssistanceApp{
     public static void main(String args[]){
         /* 

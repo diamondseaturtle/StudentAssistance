@@ -12,8 +12,9 @@ import java.util.*;
 import java.util.HashMap;
 
 /*
-*   Calculator user interface by Kayla
-*/
+ * Calculator functionality developed by Claire
+ * UI developed by Kayla
+ */
 public class CalculatorScreen extends Screen {
 
     private JTextField textFields = null;

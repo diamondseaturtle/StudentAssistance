@@ -7,6 +7,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 
+/*
+ * UI developed by Kayla
+ */
 public class Window {
     
     private static CardLayout card;
