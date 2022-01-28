@@ -15,7 +15,7 @@ public class studentAssistanceApp{
          * "calendar"
          */
         
-        Window window = new Window("calendar");
+        Window window = new Window("lock");
     }
 }
  
