@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.util.*;
 
 
-public class CalendarProgram{
+public class CalendarProgram{ 
     static JLabel currMonth, lblYear, currMonthBig;
     static JButton btnPrev, btnNext, btnPrevBig, btnNextBig, btnCurrent;
     static JTable tblCalendar, tblCalendarBig;
