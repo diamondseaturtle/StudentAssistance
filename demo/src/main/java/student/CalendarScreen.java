@@ -347,9 +347,9 @@ public class CalendarScreen extends Screen{
                 setBackground(Window.colorBox);
             }
             if (value != null){
-                if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear){ //Today
+                //if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear){ //Today
                     setBackground(Window.colorBox);
-                }
+                //}
             }
             setBorder(null);
             setForeground(Window.colorText);
