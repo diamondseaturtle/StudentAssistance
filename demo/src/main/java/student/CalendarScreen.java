@@ -35,7 +35,7 @@ public class CalendarScreen extends Screen{
     private static Container pane;
     private static DefaultTableModel mtblCalendarBig; //Table model
     private static JScrollPane stblCalendarBig; //The scrollpane
-    private static JPanel todoListPanel, allToDoListPanel;
+    private static JPanel todoListPanel, allToDoListPanel, eventPanel;
     private static int realYear, realMonth, realDay, currentYear, currentMonth;
     private static Dimension screenSize;
     private static JTextField txtTodo;
@@ -243,6 +243,10 @@ public class CalendarScreen extends Screen{
                 int col= tblCalendarBig.columnAtPoint(e.getPoint());
                 currentRow = row;
                 currentCol = col;
+            	
+            	
+
+            	
             }
         });
         //no resize/reorder for the big calendar
@@ -384,6 +388,14 @@ public class CalendarScreen extends Screen{
     }
     static class btnSaveTodo_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
+//        	eventPanel = new JPanel();
+//            eventPanel.setBackground(Window.colorBox);
+//            eventPanel.setBorder(BorderFactory.createTitledBorder("To Do")); 
+//            ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
+//            ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
+//            pane.add(eventPanel);
+//            eventPanel.setBounds(100, 50, 500, 500);
+        	
             mtblCalendarBig.setValueAt(txtTodo.getText(), currentRow, currentCol);
             JLabel task = new JLabel(txtTodo.getText());
             task.setFont(Window.getFont(20));
