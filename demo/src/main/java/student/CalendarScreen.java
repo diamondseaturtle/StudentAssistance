@@ -28,14 +28,14 @@ import javax.swing.table.DefaultTableModel;
  * UI developed by Samskrithi and Kayla
  */
 public class CalendarScreen extends Screen{ 
-    private static JLabel currMonthBig, lblTodo;
+    private static JLabel currMonthBig, lblTodo, taskList;
     private static JButton btnPrevBig, btnNextBig, btnCurrent, btnSaveTodo;
     private static JTable tblCalendarBig;
     private static JFrame frmMain;
     private static Container pane;
     private static DefaultTableModel mtblCalendarBig; //Table model
     private static JScrollPane stblCalendarBig; //The scrollpane
-    private static JPanel todoListPanel, allToDoListPanel, eventPanel;
+    private static JPanel todoListPanel, allToDoListPanel, eventPanel, taskListPanel;
     private static int realYear, realMonth, realDay, currentYear, currentMonth;
     private static Dimension screenSize;
     private static JTextField txtTodo;
@@ -108,7 +108,7 @@ public class CalendarScreen extends Screen{
         txtTodo.setFont(Window.getFont(20));
         txtTodo.setForeground(Window.colorText);
         txtTodo.setBackground(Window.colorBoxLight);
-        txtTodo .setBorder(BorderFactory.createLineBorder(Window.colorBoxLight));
+        txtTodo.setBorder(BorderFactory.createLineBorder(Window.colorBoxLight));
         
         btnSaveTodo = new JButton("Save");
         btnSaveTodo.setFont(Window.getFont(20));
@@ -239,13 +239,15 @@ public class CalendarScreen extends Screen{
         tblCalendarBig.addMouseListener(new java.awt.event.MouseAdapter() 
         { 
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                int row=tblCalendarBig.rowAtPoint(e.getPoint());
-                int col= tblCalendarBig.columnAtPoint(e.getPoint());
-                currentRow = row;
-                currentCol = col;
+            	int row=tblCalendarBig.rowAtPoint(e.getPoint());
+            	int col= tblCalendarBig.columnAtPoint(e.getPoint());     
+            	Integer selectedValue = (Integer) mtblCalendarBig.getValueAt(row, col);
+            	System.out.println (selectedValue);
             	
-            	
-
+            	String dateStr = currMonthBig.getText() + " " + selectedValue + ", " + currentYear;
+            	if (selectedValue != null) {
+            		taskList.setText("Tasks to Complete: " + dateStr);
+            	}
             	
             }
         });
@@ -279,6 +281,26 @@ public class CalendarScreen extends Screen{
         ); 
         mtblCalendarBig.setColumnCount(7);
         mtblCalendarBig.setRowCount(6);
+
+    	//create a JPanel to expand tasks per day
+        taskListPanel = new JPanel();
+        taskList = new JLabel("Tasks to Complete Today " );
+        taskList.setFont(Window.getFont(15));
+        taskList.setForeground(Color.WHITE);
+        
+        panel.add(taskListPanel);
+        taskListPanel.setBounds(
+        		Window.screenWidth/2 - calendarWidth/2 + calendarWidth + 5, 
+                Window.screenHeight/2 - calendarHeight/2, // Center Y origin
+                320, 
+                calendarHeight
+            ); 
+        taskListPanel.setBorder(BorderFactory.createTitledBorder("Tasks to do:")); 
+        taskListPanel.add(taskList);
+        taskListPanel.setVisible(true);
+        taskListPanel.setBackground(Window.colorBox);
+        ((javax.swing.border.TitledBorder) taskListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
+        ((javax.swing.border.TitledBorder) taskListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
 
         //Refresh calendar
         refreshCalendar (realMonth, realYear); //Refresh calendar
@@ -331,10 +353,12 @@ public class CalendarScreen extends Screen{
 
 
         //testing to draw the big calendar
+        int currDate = 0;
         for (int i=1; i<=nod; i++){
             int row = new Integer((i+som-2)/7);
             int column  =  (i+som-2)%7;
             mtblCalendarBig.setValueAt(i, row, column);
+            currDate = i;
         }
 
         //Apply renderers for the big calendar
@@ -388,14 +412,6 @@ public class CalendarScreen extends Screen{
     }
     static class btnSaveTodo_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
-//        	eventPanel = new JPanel();
-//            eventPanel.setBackground(Window.colorBox);
-//            eventPanel.setBorder(BorderFactory.createTitledBorder("To Do")); 
-//            ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
-//            ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
-//            pane.add(eventPanel);
-//            eventPanel.setBounds(100, 50, 500, 500);
-        	
             mtblCalendarBig.setValueAt(txtTodo.getText(), currentRow, currentCol);
             JLabel task = new JLabel(txtTodo.getText());
             task.setFont(Window.getFont(20));
@@ -406,7 +422,9 @@ public class CalendarScreen extends Screen{
     }
     static class btnCurrent_Action implements ActionListener {
         public void actionPerformed (ActionEvent e) {
-            refreshCalendar(realMonth, realYear);
+            currentMonth = realMonth; //Match month and year
+            currentYear = realYear;
+            refreshCalendar(currentMonth, currentYear);
         }
     }
 
