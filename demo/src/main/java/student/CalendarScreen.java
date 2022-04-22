@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
+import java.time.Month;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -26,8 +28,9 @@ import javax.swing.table.DefaultTableModel;
 
 /*
  * To do list functionality developed by Samskrithi
- * Calendar functionality developed by Samskrithi
+ * Calendar functionality developed by Samskrithi 
  * UI developed by Samskrithi and Kayla
+ * Additionall features developed by Claire
  */
 public class CalendarScreen extends Screen{ 
     private static JLabel currMonthBig, lblTodo, taskList;
@@ -250,6 +253,7 @@ public class CalendarScreen extends Screen{
             	System.out.println (selectedValue);
             	
             	String dateStr = currMonthBig.getText() + " " + selectedValue + ", " + currentYear;
+                parseDates(dateStr);
             	if (selectedValue != null) {
             		taskList.setText("Tasks to Complete: " + dateStr);
             	}
@@ -324,9 +328,15 @@ public class CalendarScreen extends Screen{
     }
 
     //parse date for key
-    private static String parseDates(int month, int day, int year)
+    private static String parseDates(String fullDate)
     {
-        return "";
+        String[] tokens = fullDate.split("[, ]+");
+        String monthName = tokens[0];
+        String monthVal = Integer.toString(Month.valueOf(monthName.toUpperCase()).getValue());
+        String parsed = monthVal + tokens[1] + tokens[2];
+        System.out.println(parsed);
+        return parsed;
+        
     }
 
     //make the frame fill the full size of the screen
