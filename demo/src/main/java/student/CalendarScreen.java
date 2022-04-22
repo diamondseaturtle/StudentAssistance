@@ -1,4 +1,6 @@
 package student;
+import java.util.HashMap;
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -41,10 +43,13 @@ public class CalendarScreen extends Screen{
     private static JTextField txtTodo;
     private static int currentRow;
     private static int currentCol;
+    private static HashMap<String, ArrayList<String>> indivTD = new HashMap<>();
 
     public CalendarScreen(){
 
         backButton();
+
+        
 
         // testing to create the controls for the big calendar
         currMonthBig = new JLabel("January");
@@ -284,6 +289,24 @@ public class CalendarScreen extends Screen{
         refreshCalendar (realMonth, realYear); //Refresh calendar
     }
 
+    //extra methods
+    private static void addNewList(String key, String action)
+    {
+        ArrayList<String> actionList = indivTD.get(key);
+        if (actionList == null)
+        {
+            actionList = new ArrayList<String>();
+            actionList.add(action);
+            indivTD.put(key, actionList);
+        }
+    }
+
+    //parse date for key
+    private static String parseDates(int month, int day, int year)
+    {
+        return "";
+    }
+
     //make the frame fill the full size of the screen
     private static void makeFrameFullSize(JFrame aFrame) {
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -401,9 +424,11 @@ public class CalendarScreen extends Screen{
             task.setFont(Window.getFont(20));
             task.setForeground(Color.WHITE);
             allToDoListPanel.add(task);
+
         }
 
     }
+    //Today button
     static class btnCurrent_Action implements ActionListener {
         public void actionPerformed (ActionEvent e) {
             refreshCalendar(realMonth, realYear);
