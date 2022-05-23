@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -33,7 +34,8 @@ import javax.swing.table.DefaultTableModel;
  * Additionall features developed by Claire
  */
 public class CalendarScreen extends Screen{ 
-    private static JLabel currMonthBig, lblTodo, taskList;
+    private static JLabel currMonthBig, lblTodo; //taskList
+    private static JTextArea taskList;
     private static JButton btnPrevBig, btnNextBig, btnCurrent, btnSaveTodo;
     private static JTable tblCalendarBig;
     private static JFrame frmMain;
@@ -47,6 +49,7 @@ public class CalendarScreen extends Screen{
     private static int currentRow;
     private static int currentCol;
     private static HashMap<String, ArrayList<String>> indivTD = new HashMap<>();
+    private static Integer selectedValue;
 
     public CalendarScreen(){
 
@@ -125,11 +128,11 @@ public class CalendarScreen extends Screen{
         btnSaveTodo.setFocusPainted(false);
         btnSaveTodo.setBorder(null);
         
-        allToDoListPanel = new JPanel();
-        allToDoListPanel.setBackground(Window.colorBox);
-        allToDoListPanel.setBorder(BorderFactory.createTitledBorder("List of To Do item"));
-        ((javax.swing.border.TitledBorder) allToDoListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
-        ((javax.swing.border.TitledBorder) allToDoListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
+        // allToDoListPanel = new JPanel();
+        // allToDoListPanel.setBackground(Window.colorBox);
+        // allToDoListPanel.setBorder(BorderFactory.createTitledBorder("List of To Do item"));
+        // ((javax.swing.border.TitledBorder) allToDoListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
+        // ((javax.swing.border.TitledBorder) allToDoListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
 
         //testing to register action listeners
         btnPrevBig.addActionListener(new btnPrev_Action());
@@ -149,7 +152,7 @@ public class CalendarScreen extends Screen{
         todoListPanel.add(lblTodo);
         todoListPanel.add(txtTodo);
         todoListPanel.add(btnSaveTodo);
-        panel.add(allToDoListPanel);
+        // panel.add(allToDoListPanel);
         
         //testing to set bounds for big calendar
         currMonthBig.setBounds(
@@ -211,16 +214,16 @@ public class CalendarScreen extends Screen{
             calendarHeight*1/4 // Takes up 1/4 of the left bar
         );
         
-        allToDoListPanel.setBounds(
-            0, 
+        // allToDoListPanel.setBounds(
+        //     0, 
             
-            Window.screenHeight/2 - calendarHeight/2
-            + calendarHeight*1/4 // Offset by todolist
-            + 3,
+        //     Window.screenHeight/2 - calendarHeight/2
+        //     + calendarHeight*1/4 // Offset by todolist
+        //     + 3,
             
-            320, 
-            calendarHeight*3/4 // Takes up 3/4 of the left bar
-        );
+        //     320, 
+        //     calendarHeight*3/4 // Takes up 3/4 of the left bar
+        // );
         
         btnSaveTodo.setEnabled(true);
        
@@ -249,14 +252,25 @@ public class CalendarScreen extends Screen{
             public void mouseClicked(java.awt.event.MouseEvent e) {
             	int row=tblCalendarBig.rowAtPoint(e.getPoint());
             	int col= tblCalendarBig.columnAtPoint(e.getPoint());     
-            	Integer selectedValue = (Integer) mtblCalendarBig.getValueAt(row, col);
+            	//Integer selectedValue = (Integer) mtblCalendarBig.getValueAt(row, col);
+                selectedValue = (Integer) mtblCalendarBig.getValueAt(row, col);
             	System.out.println (selectedValue);
             	
             	String dateStr = currMonthBig.getText() + " " + selectedValue + ", " + currentYear;
                 parseDates(dateStr);
-            	if (selectedValue != null) {
-            		taskList.setText("Tasks to Complete: " + dateStr);
-            	}
+            	// if (selectedValue != null) {
+            	// 	taskList.setText("Tasks to Complete: " + dateStr);
+            	// }
+                if (selectedValue != null && indivTD.containsKey(parseDates(dateStr))) 
+                {
+                    String allTask = "";
+                    for (String task : indivTD.get(parseDates(dateStr))) {
+                        allTask += "\n" + task;
+                    }
+                    taskList.setText("Tasks to Complete: " + dateStr + allTask);
+                } else {
+                    taskList.setText("Tasks to Complete: " + dateStr);
+                }
             	
             }
         });
@@ -293,9 +307,11 @@ public class CalendarScreen extends Screen{
 
     	//create a JPanel to expand tasks per day
         taskListPanel = new JPanel();
-        taskList = new JLabel("Tasks to Complete Today " );
+        //taskList = new JLabel("Tasks to Complete Today " );
+        taskList = new JTextArea ("Tasks to Complete Today " );
         taskList.setFont(Window.getFont(15));
         taskList.setForeground(Color.WHITE);
+        taskList.setOpaque(false);
         
         panel.add(taskListPanel);
         taskListPanel.setBounds(
@@ -445,11 +461,35 @@ public class CalendarScreen extends Screen{
     }
     static class btnSaveTodo_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
-            mtblCalendarBig.setValueAt(txtTodo.getText(), currentRow, currentCol);
+            // mtblCalendarBig.setValueAt(txtTodo.getText(), currentRow, currentCol);
             JLabel task = new JLabel(txtTodo.getText());
             task.setFont(Window.getFont(20));
             task.setForeground(Color.WHITE);
-            allToDoListPanel.add(task);
+            // allToDoListPanel.add(task);
+            if (selectedValue != null) {
+                String dateStr = currMonthBig.getText() + " " + selectedValue + ", " + currentYear;
+                if (indivTD.containsKey(parseDates(dateStr))) {
+                    indivTD.get(parseDates(dateStr)).add(task.getText());
+                    String allTask = "";
+                    for (String s : indivTD.get(parseDates(dateStr))) {
+                        allTask += "\n" + s;
+                    }
+                    taskList.setText("Tasks to Complete: " + dateStr + allTask);
+                    
+                }
+                else 
+                {
+                    addNewList(parseDates(dateStr), task.getText());
+                    System.out.println(indivTD.get(parseDates(dateStr)));
+                    String allTask = "";
+                    for (String s : indivTD.get(parseDates(dateStr))) {
+                        allTask += "\n" + s;
+                    }
+                    taskList.setText("Tasks to Complete: " + dateStr + allTask);
+
+                }
+
+            }
 
         }
 
