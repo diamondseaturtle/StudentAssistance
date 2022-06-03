@@ -13,9 +13,10 @@ public class studentAssistanceApp{
          * "home
          * "calculator"
          * "calendar"
+         * "notebook"
          */
         
-        Window window = new Window("calendar");
+        Window window = new Window("notebook");
     }
 }
  
