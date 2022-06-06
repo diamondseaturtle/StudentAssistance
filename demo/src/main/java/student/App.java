@@ -28,6 +28,7 @@ import com.mongodb.client.model.ReplaceOptions;
 */
 public class App 
 {
+    
     public static void createUser(String usr, String pss, MongoCollection<Document> collection, MongoDatabase database)
     {
         Document doc = collection.find(eq("username", usr)).first();
@@ -156,4 +157,5 @@ public class App
         
     }
 }
+
     

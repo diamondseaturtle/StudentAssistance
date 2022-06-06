@@ -78,15 +78,24 @@ public class LockScreen extends Screen {
     public LockScreen() {
 
         // user interface image overlay
-        ui = new JLabel("", new ImageIcon("res/UILogin.png"), JLabel.LEFT);
+        ui = new JLabel("", 
+             new ImageIcon(
+                 ThemeManager.tint("res/UILogin.png", 
+                 ThemeManager.getColorText())), 
+            JLabel.LEFT);
+            
         ui.setBounds(0, 0, 1280, 720);
         panel.add(ui);
 
         closeButton();
-
+        
         // Button: Create a new account
         creatingAccount = false;
-        buttonAccount = new JLabel("", new ImageIcon("res/AccountCreate.png"), JLabel.LEFT);
+        buttonAccount = new JLabel("", 
+                        new ImageIcon(
+                            ThemeManager.tint("res/AccountCreate.png", 
+                            ThemeManager.getColorText())), 
+                        JLabel.LEFT);
         buttonAccount.setBounds(587, 447, 450, 55);
         panel.add(buttonAccount);
         buttonAccount.addMouseListener(new MouseAdapter() {
@@ -97,19 +106,30 @@ public class LockScreen extends Screen {
 
                 creatingAccount = !creatingAccount; // swap boolean value
                 if (creatingAccount) {
-                    ui.setIcon(new ImageIcon("res/UIAccount.png"));
-                    buttonAccount.setIcon(new ImageIcon("res/AccountLogin.png"));
+                    ui.setIcon(new ImageIcon(
+                            ThemeManager.tint("res/UIAccount.png", 
+                            ThemeManager.getColorText())));
+                            
+                    buttonAccount.setIcon(new ImageIcon(
+                            ThemeManager.tint("res/AccountLogin.png", 
+                            ThemeManager.getColorText())));
 
                 } else {
-                    ui.setIcon(new ImageIcon("res/UILogin.png"));
-                    buttonAccount.setIcon(new ImageIcon("res/AccountCreate.png"));
+                    ui.setIcon(new ImageIcon(
+                            ThemeManager.tint("res/UILogin.png", 
+                            ThemeManager.getColorText())));
+                    buttonAccount.setIcon(new ImageIcon(
+                            ThemeManager.tint("res/AccountCreate.png", 
+                            ThemeManager.getColorText())));
 
                 }
             }
         });
-
+        
         // Button: Login
-        buttonLogin = new JLabel("", new ImageIcon("res/Login.png"), JLabel.LEFT);
+        buttonLogin = new JLabel("", new ImageIcon(
+                            ThemeManager.tint("res/Login.png", 
+                            ThemeManager.getColorText())), JLabel.LEFT);
         buttonLogin.setBounds(1010, 447, 260, 55);
         panel.add(buttonLogin);
         buttonLogin.addMouseListener(new MouseAdapter() {
@@ -134,15 +154,15 @@ public class LockScreen extends Screen {
                 Window.switchScreen("home");
             }
         });
-
+        
         textFields = new JTextField[2];
         for (int i = 0; i < 2; i++) {
             textFields[i] = new JTextField();
             textFields[i].setColumns(1);
             textFields[i].setFont(Window.getFont(28));
-            textFields[i].setBackground(Window.colorBox);
-            textFields[i].setBorder(BorderFactory.createLineBorder(Window.colorBox));
-            textFields[i].setForeground(Window.colorText);
+            textFields[i].setBackground(ThemeManager.getColorBox());
+            textFields[i].setBorder(BorderFactory.createLineBorder(ThemeManager.getColorBox()));
+            textFields[i].setForeground(ThemeManager.getColorText());
         }
 
         textFields[0].setBounds(853, 303, 353, 55);

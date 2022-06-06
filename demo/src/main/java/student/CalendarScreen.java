@@ -61,26 +61,26 @@ public class CalendarScreen extends Screen{
         currMonthBig = new JLabel("January");
         currMonthBig.setHorizontalAlignment(JLabel.CENTER);
         currMonthBig.setFont(Window.getFont(28));
-        currMonthBig.setForeground(Window.colorText);
+        currMonthBig.setForeground(ThemeManager.getColorText());
         
         btnPrevBig = new JButton("<");
         btnPrevBig.setFont(Window.getFont(20));
-        btnPrevBig.setForeground(Window.colorText);
-        btnPrevBig.setBackground(Window.colorBox);
+        btnPrevBig.setForeground(ThemeManager.getColorText());
+        btnPrevBig.setBackground(ThemeManager.getColorBox());
         btnPrevBig.setFocusPainted(false);
         btnPrevBig.setBorder(null);
         
         btnNextBig = new JButton(">");
         btnNextBig.setFont(Window.getFont(20));
-        btnNextBig.setForeground(Window.colorText);
-        btnNextBig.setBackground(Window.colorBox);
+        btnNextBig.setForeground(ThemeManager.getColorText());
+        btnNextBig.setBackground(ThemeManager.getColorBox());
         btnNextBig.setFocusPainted(false);
         btnNextBig.setBorder(null);
         
         btnCurrent = new JButton("Today");
         btnCurrent.setFont(Window.getFont(20));
-        btnCurrent.setForeground(Window.colorText);
-        btnCurrent.setBackground(Window.colorBox);
+        btnCurrent.setForeground(ThemeManager.getColorText());
+        btnCurrent.setBackground(ThemeManager.getColorBox());
         btnCurrent.setFocusPainted(false);
         btnCurrent.setBorder(null);
         
@@ -96,35 +96,35 @@ public class CalendarScreen extends Screen{
         final int calendarHeight = 390; // Optimally divisible by 6
           
         tblCalendarBig = new JTable(mtblCalendarBig);
-        tblCalendarBig.setGridColor(Window.colorBorder); // Border inside grid
-        tblCalendarBig.setBorder(BorderFactory.createLineBorder(Window.colorBorder)); // Border outside grid
+        tblCalendarBig.setGridColor(ThemeManager.getColorBorder()); // Border inside grid
+        tblCalendarBig.setBorder(BorderFactory.createLineBorder(ThemeManager.getColorBorder())); // Border outside grid
         
         stblCalendarBig = new JScrollPane(tblCalendarBig);
-        stblCalendarBig.setBorder(BorderFactory.createLineBorder(Window.colorBox)); 
+        stblCalendarBig.setBorder(BorderFactory.createLineBorder(ThemeManager.getColorBox())); 
         
         //todo
         todoListPanel = new JPanel();
-        todoListPanel.setBackground(Window.colorBox);
+        todoListPanel.setBackground(ThemeManager.getColorBox());
         todoListPanel.setBorder(BorderFactory.createTitledBorder("To Do")); 
         ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
-        ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
+        ((javax.swing.border.TitledBorder) todoListPanel.getBorder()).setTitleColor(ThemeManager.getColorText()); // set border text color
         
         lblTodo = new JLabel("Enter a to do: ");
         lblTodo.setFont(Window.getFont(20));
-        lblTodo.setForeground(Window.colorText);
+        lblTodo.setForeground(ThemeManager.getColorText());
         
         txtTodo = new JTextField();
         txtTodo.setColumns(10);
         txtTodo.setText("Reading");
         txtTodo.setFont(Window.getFont(20));
-        txtTodo.setForeground(Window.colorText);
-        txtTodo.setBackground(Window.colorBoxLight);
-        txtTodo.setBorder(BorderFactory.createLineBorder(Window.colorBoxLight));
+        txtTodo.setForeground(ThemeManager.getColorText());
+        txtTodo.setBackground(ThemeManager.getColorBoxLight());
+        txtTodo.setBorder(BorderFactory.createLineBorder(ThemeManager.getColorBoxLight()));
         
         btnSaveTodo = new JButton("Save");
         btnSaveTodo.setFont(Window.getFont(20));
-        btnSaveTodo.setForeground(Window.colorText);
-        btnSaveTodo.setBackground(Window.colorBoxLight);
+        btnSaveTodo.setForeground(ThemeManager.getColorText());
+        btnSaveTodo.setBackground(ThemeManager.getColorBoxLight());
         btnSaveTodo.setFocusPainted(false);
         btnSaveTodo.setBorder(null);
         
@@ -283,9 +283,9 @@ public class CalendarScreen extends Screen{
         
         // Header customization settings
         tblCalendarBig.getTableHeader().setFont(Window.getFont(20));
-        tblCalendarBig.getTableHeader().setForeground(Color.WHITE);
-        tblCalendarBig.getTableHeader().setBackground(Window.colorBox);
-        tblCalendarBig.getTableHeader().setBorder(BorderFactory.createLineBorder(Window.colorBorder));
+        tblCalendarBig.getTableHeader().setForeground(ThemeManager.getColorText());
+        tblCalendarBig.getTableHeader().setBackground(ThemeManager.getColorBox());
+        tblCalendarBig.getTableHeader().setBorder(BorderFactory.createLineBorder(ThemeManager.getColorBorder()));
 
         //Single cell selection
         tblCalendarBig.setColumnSelectionAllowed(true);
@@ -310,7 +310,7 @@ public class CalendarScreen extends Screen{
         //taskList = new JLabel("Tasks to Complete Today " );
         taskList = new JTextArea ("Tasks to Complete Today " );
         taskList.setFont(Window.getFont(15));
-        taskList.setForeground(Color.WHITE);
+        taskList.setForeground(ThemeManager.getColorText());
         taskList.setOpaque(false);
         
         panel.add(taskListPanel);
@@ -323,9 +323,9 @@ public class CalendarScreen extends Screen{
         taskListPanel.setBorder(BorderFactory.createTitledBorder("Tasks to do:")); 
         taskListPanel.add(taskList);
         taskListPanel.setVisible(true);
-        taskListPanel.setBackground(Window.colorBox);
+        taskListPanel.setBackground(ThemeManager.getColorBox());
         ((javax.swing.border.TitledBorder) taskListPanel.getBorder()).setTitleFont(Window.getFont(20)); // set border font
-        ((javax.swing.border.TitledBorder) taskListPanel.getBorder()).setTitleColor(Window.colorText); // set border text color
+        ((javax.swing.border.TitledBorder) taskListPanel.getBorder()).setTitleColor(ThemeManager.getColorText()); // set border text color
 
         //Refresh calendar
         refreshCalendar (realMonth, realYear); //Refresh calendar
@@ -418,18 +418,18 @@ public class CalendarScreen extends Screen{
         public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
             if (column == 0 || column == 6){ //Week-end
-                setBackground(Window.colorBox);
+                setBackground(ThemeManager.getColorBox());
             }
             else{ //Week
-                setBackground(Window.colorBox);
+                setBackground(ThemeManager.getColorBox());
             }
             if (value != null){
                 //if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear){ //Today
-                    setBackground(Window.colorBox);
+                    setBackground(ThemeManager.getColorBox());
                 //}
             }
             setBorder(null);
-            setForeground(Window.colorText);
+            setForeground(ThemeManager.getColorText());
             setFont(Window.getFont(25));
             return this;
         }

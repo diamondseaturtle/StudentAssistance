@@ -29,13 +29,13 @@ public class HomeScreen extends Screen {
         time = new JLabel(getTime(), JLabel.LEFT);
         time.setBounds(500, 160, 500, 250);
         time.setFont(Window.getFont(72));
-        time.setForeground(Window.colorText);
+        time.setForeground(ThemeManager.getColorText());
         panel.add(time);
 
         date = new JLabel(getDate(), JLabel.CENTER);
         date.setBounds(0, 0, Window.screenWidth, 680);
         date.setFont(Window.getFont(20));
-        date.setForeground(Window.colorText);
+        date.setForeground(ThemeManager.getColorText());
         panel.add(date);
 
         // Repaint time every second
@@ -51,9 +51,10 @@ public class HomeScreen extends Screen {
 
         // Set up app buttons
         final String[] buttonVals = {
-            //"notebook",
             "calculator",
             "calendar",
+            "notebook",
+            "settings",
             "exit"
         };
 
@@ -67,7 +68,7 @@ public class HomeScreen extends Screen {
 
         buttons = new JLabel[buttonVals.length];
         for (int i = 0; i < buttonVals.length; i++) {
-            buttons[i] = new JLabel(buttonVals[i], new ImageIcon("res/Icon" + buttonVals[i] + ".png"), JLabel.LEFT);
+            buttons[i] = new JLabel(buttonVals[i], new ImageIcon(ThemeManager.tint("res/Icon" + buttonVals[i] + ".png", ThemeManager.getColorText())), JLabel.LEFT);
 
             // Get dimensions of all buttons laid out
 

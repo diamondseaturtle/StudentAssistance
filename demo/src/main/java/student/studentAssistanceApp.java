@@ -10,13 +10,16 @@ public class studentAssistanceApp{
         /* 
          * change string to the window you want to test, the application will start on that screen when run
          * "lock" 
-         * "home
+         * "home"
          * "calculator"
          * "calendar"
          * "notebook"
+         * "settings"
          */
         
-        Window window = new Window("notebook");
+        ThemeManager themeManager = new ThemeManager("dark");
+        Window window = new Window("lock");
+        
     }
 }
  

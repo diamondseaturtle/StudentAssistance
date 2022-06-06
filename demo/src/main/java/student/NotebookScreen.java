@@ -20,8 +20,8 @@ public class NotebookScreen extends Screen {
         
         addNotebook = new JButton("+");
         addNotebook.setFont(Window.getFont(40));
-        addNotebook.setForeground(Window.colorText);
-        addNotebook.setBackground(Window.colorBox);
+        addNotebook.setForeground(ThemeManager.getColorText());
+        addNotebook.setBackground(ThemeManager.getColorBox());
         addNotebook.setFocusPainted(false);
         addNotebook.setBorder(null);
         addNotebook.addActionListener(new addNotebook_Action());
@@ -30,7 +30,7 @@ public class NotebookScreen extends Screen {
         
         miniPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panel.add(miniPanel);
-        miniPanel.setBackground(Window.colorBox);
+        miniPanel.setBackground(ThemeManager.getColorBox());
         miniPanel.setBounds(10, 50, Window.screenWidth - 25, Window.screenHeight - 70);
         
 

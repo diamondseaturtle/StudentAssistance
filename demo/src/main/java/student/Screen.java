@@ -18,7 +18,7 @@ public class Screen{
     
     protected void closeButton(){
         // Closes the window
-        JLabel close = new JLabel("", new ImageIcon("res/Close.png"), JLabel.LEFT);
+        JLabel close = new JLabel("", new ImageIcon(ThemeManager.tint("res/Close.png", ThemeManager.getColorText())), JLabel.LEFT);
         close.setBounds(Window.screenWidth-45, 0, 45, 45);
         panel.add(close);
         close.addMouseListener(new MouseAdapter()
@@ -32,7 +32,7 @@ public class Screen{
     
     protected void backButton(){
         // Closes the window
-        JLabel close = new JLabel("", new ImageIcon("res/Back.png"), JLabel.LEFT);
+        JLabel close = new JLabel("", new ImageIcon(ThemeManager.tint("res/Back.png", ThemeManager.getColorText())), JLabel.LEFT);
         close.setBounds(Window.screenWidth-50, 5, 45, 45);
         panel.add(close);
         close.addMouseListener(new MouseAdapter()

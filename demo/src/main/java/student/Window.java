@@ -18,10 +18,6 @@ public class Window {
     private static JPanel cardPane;
 
     private static Font font;
-    public static Color colorBox;
-    public static Color colorText;
-    public static Color colorBorder;
-    public static Color colorBoxLight;
     public static int screenWidth;
     public static int screenHeight;
 
@@ -30,6 +26,7 @@ public class Window {
     private static HomeScreen home;
     private static CalendarScreen calendar;
     private static NotebookScreen notebook;
+    private static SettingsScreen settings;
     
     public Window(String start) {
         
@@ -45,12 +42,6 @@ public class Window {
         frame.setTitle("Student Assistance App");
         frame.setIconImage((new ImageIcon("res/IconApp.png").getImage()));
 
-        // Set up static variables/colors
-        colorBox = new Color(48, 47, 78);
-        colorBoxLight = new Color(58, 57, 88);
-        colorText = new Color(225, 225, 225);
-        colorBorder = new Color (150, 150, 150);
-
         try {
             font = font.createFont(Font.TRUETYPE_FONT, new File("res/Montserrat.ttf"));
         } catch (Exception e) {
@@ -61,7 +52,7 @@ public class Window {
         card = new CardLayout();
         cardPane = new JPanel();
         cardPane.setLayout(card);
-        cardPane.setBackground(new Color(37, 36, 62));
+        cardPane.setBackground(ThemeManager.getColorBG());
 
         // Create all screens here
         home = new HomeScreen();
@@ -69,6 +60,7 @@ public class Window {
         calendar = new CalendarScreen();
         calculator = new CalculatorScreen();
         notebook = new NotebookScreen();
+        settings = new SettingsScreen();
         
         // Add all screens to cardpane
         cardPane.add(home.getPanel(), "home");
@@ -76,6 +68,7 @@ public class Window {
         cardPane.add(calendar.getPanel(), "calendar");
         cardPane.add(calculator.getPanel(), "calculator");
         cardPane.add(notebook.getPanel(), "notebook");
+        cardPane.add(settings.getPanel(), "settings");
         
         switchScreen(start);
         frame.add(cardPane);
