@@ -5,17 +5,30 @@ import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class NotebookScreen extends Screen {
-	private static JButton addNotebook, newButton;
+	private static JButton addNotebook;
+    private static JTextField nameNotebook;
 	private static JPanel miniPanel;
 
 	
     public NotebookScreen(){
     	
         backButton();
+        
+        nameNotebook = new JTextField();
+        nameNotebook.setColumns(10);
+        nameNotebook.setText("New Notebook");
+        nameNotebook.setFont(Window.getFont(40));
+        nameNotebook.setForeground(ThemeManager.getColorText());
+        nameNotebook.setBackground(ThemeManager.getColorBoxLight());
+        nameNotebook.setBorder(BorderFactory.createLineBorder(ThemeManager.getColorBoxLight()));
+        panel.add(nameNotebook);
+        nameNotebook.setBounds(5, 5, 40, 40);
         
         addNotebook = new JButton("+");
         addNotebook.setFont(Window.getFont(40));
@@ -25,7 +38,7 @@ public class NotebookScreen extends Screen {
         addNotebook.setBorder(null);
         addNotebook.addActionListener(new addNotebook_Action());
         panel.add(addNotebook);
-        addNotebook.setBounds(5, 5, 40, 40); //top right
+        addNotebook.setBounds(50, 5, 40, 40); //top left
         
         miniPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panel.add(miniPanel);
