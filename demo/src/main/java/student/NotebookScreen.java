@@ -19,7 +19,7 @@ public class NotebookScreen extends Screen {
 	private JList list;
 
 
-	public NotebookScreen(){
+	public NotebookScreen() {
 
 		backButton();
 
