@@ -53,7 +53,7 @@ public class HomeScreen extends Screen {
         final String[] buttonVals = {
             "calculator",
             "calendar",
-            "notebook",
+            // "notebook",
             "settings",
             "exit"
         };

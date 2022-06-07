@@ -1,4 +1,4 @@
-//package student;
+package student;
 //
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
@@ -12,7 +12,9 @@
 //import javax.swing.JPanel;
 //import javax.swing.JTextField;
 //
-//public class NotebookScreen extends Screen {
+public class NotebookScreen {
+	
+}
 //	private static JButton addNotebook;
 //	private static JTextField nameNotebook;
 //	private static JPanel miniPanel;
@@ -79,5 +81,6 @@
 //		}
 //	}
 //	
-//}
+	
+// }
 //
