@@ -25,7 +25,7 @@ public class Window {
     private static CalculatorScreen calculator;
     private static HomeScreen home;
     private static CalendarScreen calendar;
-    private static NotebookScreen notebook;
+//    private static NotebookScreen notebook;
     private static SettingsScreen settings;
     
     public Window(String start) {
@@ -59,7 +59,7 @@ public class Window {
         lock = new LockScreen();
         calendar = new CalendarScreen();
         calculator = new CalculatorScreen();
-        notebook = new NotebookScreen();
+//        notebook = new NotebookScreen();
         settings = new SettingsScreen();
         
         // Add all screens to cardpane
@@ -67,7 +67,7 @@ public class Window {
         cardPane.add(lock.getPanel(), "lock");
         cardPane.add(calendar.getPanel(), "calendar");
         cardPane.add(calculator.getPanel(), "calculator");
-        cardPane.add(notebook.getPanel(), "notebook");
+//        cardPane.add(notebook.getPanel(), "notebook");
         cardPane.add(settings.getPanel(), "settings");
         
         switchScreen(start);
