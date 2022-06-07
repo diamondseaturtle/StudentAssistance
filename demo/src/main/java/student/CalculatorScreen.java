@@ -300,10 +300,16 @@ package student;
                         JLabel label = (JLabel) e.getSource(); // Get JLabel
                         String string = label.getText();
                         if (string.equals("=")) {
-                            textFields.setText( // 3. Calculated result is put back into the text field
-                                    String.valueOf(calculate( // 2. String is put into calculator
-                                    textFields.getText(), valueLookup // 1. String equation from the text field is obtained
-                                    )));
+                            try {
+                                textFields.setText( // 3. Calculated result is put back into the text field
+                                        String.valueOf(calculate( // 2. String is put into calculator
+                                        textFields.getText(), valueLookup // 1. String equation from the text field is obtained
+                                        )));    
+                            } catch (IllegalArgumentException err)
+                            {
+                                textFields.setText(err.getMessage());
+                            }
+                            
                         } else if (string.equals("C")) {
                             textFields.setText(""); // Clear text
                         } else {
