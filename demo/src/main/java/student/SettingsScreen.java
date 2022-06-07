@@ -90,12 +90,22 @@ public class SettingsScreen extends Screen
         RGB[0] = sliders[0].getValue();
         RGB[1] = sliders[1].getValue();
         RGB[2] = sliders[2].getValue();
+        
+        // Set the bg of the text field so the user knows what color is set
         textField.setBackground(new Color(RGB[0], RGB[1], RGB[2]));
+        // Set the text color to the inverse of the selected color; ensures its always visible
+        textField.setForeground(new Color(255-RGB[0], 255-RGB[1], 255-RGB[2]));
         
         String hex = "";
         for(int i = 0; i < 3; i++){
             String val = Integer.toHexString(RGB[i]);
-            val = (String.format("%02d", val)).toString();
+            
+            // val = (String.format("%02d", val)).toString();
+            // Parse 0 to the beginning if color value is only one character; ensures hex code is always 6 characters
+            if(val.length()==1){
+                val = "0"+val;
+            }
+            
             hex += val;
         }
         textField.setText(hex);
