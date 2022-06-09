@@ -47,7 +47,7 @@ public class LockScreen extends Screen {
     private MongoCollection < Document > collection = database.getCollection("users");
 
     private boolean createAccount(String username, String password, MongoDatabase database, MongoCollection < Document > collection) {
-        // return true if account is successfully created
+        // return true if account is successfully created (for testing purposes)
         // return false otherwise; username is already taken
         Document doc = collection.find(eq("username", username)).first();
         if (doc == null) {
@@ -61,7 +61,7 @@ public class LockScreen extends Screen {
     }
 
     private boolean login(String username, String password, MongoDatabase databse, MongoCollection < Document > collection) {
-        // return true if login is successful
+        // return true if login is successful (for testing purposes)
         // return false otherwise; username or password is incorrect
         BasicDBObject andQuery = new BasicDBObject();
         List < BasicDBObject > criteria = new ArrayList < BasicDBObject > ();
