@@ -19,7 +19,8 @@ package student;
     
         private JTextField textFields = null;
         private JLabel[][] buttons = null;
-    
+        
+        //values for order of operations
         private HashMap<String, Integer> valueLookup = new HashMap<String, Integer>();
         {{
             valueLookup.put("-", 0);
@@ -28,7 +29,8 @@ package student;
             valueLookup.put("*", 1);
             valueLookup.put("^", 2);
         }}
-    
+        
+        //states for parsing an equation
         private enum Stage
         {
             Sign,
@@ -39,14 +41,17 @@ package student;
             Failure
         }
     
+        //parse equation for calculation: switches between different stages of token search
         private static void stringParser(String eq, ArrayList<String> tokens, HashMap<String, Integer> valCheck)
         {
             Stage flag = Stage.Parentheses;
             String addStr = "";
             for (int i = 0; i < eq.length();)
             {
+                //search for parentheses
                 if (flag == Stage.Parentheses)
                 {
+                    //if parentheses found, start counter
                     if (eq.charAt(i) == '(')
                     {
                         int counter = 1;
@@ -65,10 +70,12 @@ package student;
                             }
                             i++;
                         }
+                        //if counter = 0, parentheses don't match, go to failure state
                         if (counter != 0)
                         {
                             flag = Stage.Failure;
                         }
+                        //go to operand search state
                         else
                         {
                             tokens.add(addStr);
@@ -76,13 +83,16 @@ package student;
                             flag = Stage.Operand;
                         }
                     }
+                    //no parentheses, look for negative sign
                     else
                     {
                         flag = Stage.Sign;
                     }
                 }
+                //searching for negative sign
                 else if (flag == Stage.Sign)
                 {
+                    //if negative found, add to string token, go to number search 
                     if (eq.substring(i, i + 1).equals("-"))
                     {
                         addStr += eq.substring(i, i + 1);
@@ -90,15 +100,18 @@ package student;
                     }
                     flag = Stage.Number;
                 }
+                //searching for numbers
                 else if (flag == Stage.Number)
                 {
                     boolean found = false;
                     while (i < eq.length())
                     {
+                        //if decimal or number found, proceed with tokenizing
                         if (Character.isDigit(eq.charAt(i)) || eq.substring(i, i + 1).equals("."))
                         {
                             addStr += eq.substring(i, i + 1);
                             found = true;
+                            //if decimal found, go to decmial state
                             if (eq.substring(i, i + 1).equals("."))
                             {
                                 flag = Stage.Decimal;
@@ -115,6 +128,7 @@ package student;
                             break;
                         }
                     }
+                    //if number and not decimal, add token and go to operand state
                     if (found && flag != Stage.Decimal)
                     {
                         tokens.add(addStr);
@@ -126,34 +140,41 @@ package student;
                         flag = Stage.Failure;
                     }
                 }
+                //decmial found
                 else if (flag == Stage.Decimal)
                 {
                     boolean found = false;
+                    //look for numbers after decimal
                     while (i < eq.length() && Character.isDigit(eq.charAt(i)))
                     {
                         addStr += eq.substring(i, i + 1);
                         found = true;
                         i++;
                     }
+                    //found number, go to operand search
                     if (found)
                     {
                         tokens.add(addStr);
                         addStr = "";
                         flag = Stage.Operand;
                     }
+                    //no number, incorrect input, go to failure
                     else
                     {
                         flag = Stage.Failure;
                     }
                 }
+                //operand search
                 else if (flag == Stage.Operand)
                 {
+                    //if operand is valid, add to list, go to parentheses state
                     if (valCheck.containsKey(eq.substring(i, i + 1)))
                     {
                         tokens.add(eq.substring(i, i + 1));
                         flag = Stage.Parentheses;
                         i++;
                     }
+                    //invalid operand, go to failure
                     else
                     {
                         flag = Stage.Failure;
@@ -165,12 +186,14 @@ package student;
                 }
     
             }
+            //invalid inputs
             if (flag == Stage.Failure)
             {
                 throw new IllegalArgumentException("Invalid arguments");
             }
         }
     
+        //for operations between two numbers 
         private static double doOperation(double num1, double num2, String operator)
         {
             double result = 0;
@@ -197,6 +220,7 @@ package student;
             return result;
         }
     
+        //calculates the equation input
         private double calculate(String eq, HashMap<String, Integer> valCheck){
             ArrayList<String> tokens = new ArrayList<String>();
             Stack<Double> operands = new Stack<Double>();

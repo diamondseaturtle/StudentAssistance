@@ -263,6 +263,7 @@ public class CalendarScreen extends Screen{
             	// }
                 if (selectedValue != null && indivTD.containsKey(parseDates(dateStr))) 
                 {
+                    //Task display
                     String allTask = "";
                     for (String task : indivTD.get(parseDates(dateStr))) {
                         allTask += "\n" + task;
@@ -466,8 +467,10 @@ public class CalendarScreen extends Screen{
             task.setFont(Window.getFont(20));
             task.setForeground(Color.WHITE);
             // allToDoListPanel.add(task);
+            //if date selected, proceed with adding task.
             if (selectedValue != null) {
                 String dateStr = currMonthBig.getText() + " " + selectedValue + ", " + currentYear;
+                //if date exists as key, insert task into list, else, create new list and key
                 if (indivTD.containsKey(parseDates(dateStr))) {
                     indivTD.get(parseDates(dateStr)).add(task.getText());
                     String allTask = "";
