@@ -39,6 +39,7 @@ public class Theme{
     public Color getColorBG(){
         return colorBG;
     }
+    
     /*
     public Color getColorImage(){
         return colorImage;

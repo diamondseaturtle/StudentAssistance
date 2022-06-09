@@ -15,7 +15,8 @@ public class ThemeManager {
     private Theme light;
     private Theme dark;
     private static Theme currentTheme;
-    private HashMap < String, Theme > themes = new HashMap < > ();
+    private static HashMap < String, Theme > themes = new HashMap < > ();
+    private static Window window = null;
 
     public ThemeManager(String currentTheme) {
         /*
@@ -47,9 +48,16 @@ public class ThemeManager {
         themes.put("light", light);
 
         this.currentTheme = themes.get(currentTheme);
+        
     }
-    public void switchTheme(String currentTheme) {
-        this.currentTheme = themes.get(currentTheme);
+    
+    public static void switchTheme(String theme) {
+        currentTheme = themes.get(theme);
+        Window.updateScreens();  // redraw every window element now that the theme has been updated
+    }
+    
+    public static void addTheme (String name, Theme theme){
+        themes.put(name, theme);
     }
     public static Color getColorBox() {
         return currentTheme.getColorBox();

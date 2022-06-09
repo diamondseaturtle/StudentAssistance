@@ -25,7 +25,7 @@ public class Window {
     private static CalculatorScreen calculator;
     private static HomeScreen home;
     private static CalendarScreen calendar;
-//    private static NotebookScreen notebook;
+    private static NotebookScreen notebook;
     private static SettingsScreen settings;
     
     public Window(String start) {
@@ -52,23 +52,9 @@ public class Window {
         card = new CardLayout();
         cardPane = new JPanel();
         cardPane.setLayout(card);
-        cardPane.setBackground(ThemeManager.getColorBG());
-
-        // Create all screens here
-        home = new HomeScreen();
-        lock = new LockScreen();
-        calendar = new CalendarScreen();
-        calculator = new CalculatorScreen();
-//        notebook = new NotebookScreen();
-        settings = new SettingsScreen();
         
-        // Add all screens to cardpane
-        cardPane.add(home.getPanel(), "home");
-        cardPane.add(lock.getPanel(), "lock");
-        cardPane.add(calendar.getPanel(), "calendar");
-        cardPane.add(calculator.getPanel(), "calculator");
-//        cardPane.add(notebook.getPanel(), "notebook");
-        cardPane.add(settings.getPanel(), "settings");
+        updateBG();
+        createScreens();
         
         switchScreen(start);
         frame.add(cardPane);
@@ -84,5 +70,30 @@ public class Window {
     }
     public static Font getFont(int size) {
         return font.deriveFont(Font.TRUETYPE_FONT, size);
+    }
+    public static void updateScreens(){
+        updateBG();
+        createScreens();
+        switchScreen("settings");
+    }
+    private static void updateBG(){
+        cardPane.setBackground(ThemeManager.getColorBG());
+    }
+    private static void createScreens(){
+        // Create all screens here
+        home = new HomeScreen();
+        lock = new LockScreen();
+        calendar = new CalendarScreen();
+        calculator = new CalculatorScreen();
+        // notebook = new NotebookScreen();
+        settings = new SettingsScreen();
+        
+        // Add all screens to cardpane
+        cardPane.add(home.getPanel(), "home");
+        cardPane.add(lock.getPanel(), "lock");
+        cardPane.add(calendar.getPanel(), "calendar");
+        cardPane.add(calculator.getPanel(), "calculator");
+        // cardPane.add(notebook.getPanel(), "notebook");
+        cardPane.add(settings.getPanel(), "settings");
     }
 }
